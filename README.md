@@ -14,14 +14,23 @@ to `N` threads
 
 # java
 * semaphores in Java are represented by `Semaphores` class
+* constructors
+    * `Semaphore(int permits)`
+    * `Semaphore(int permits, boolean fair)`
+        * `fair` denotes if this semaphore will guarantee
+         FIFO granting of permits under contention
 * useful methods:
     * `void acquire() throws InterruptedException`
         * acquires a permit, if one is available and returns immediately, 
         reducing the number of available permits by one
+        * blocks if a permit is not available
+        * thread could be interrupted while waiting for permit
     * `void acquire(int permits)`
     * `void acquireUninterruptibly()`
+        * can't be interrupted while waiting for permit
     * `void acquireUninterruptibly(int permits)`
-    * `boolean tryAcquire()`
+    * `boolean tryAcquire()` - acquires a permit from this semaphore, only if one is available at the
+        time of invocation
     * `boolean tryAcquire(int permits)`
     * `boolean tryAcquire(long timeout, TimeUnit unit)`
     * `boolean tryAcquire(int permits, long timeout, TimeUnit unit)`
@@ -31,6 +40,7 @@ to `N` threads
     * `void release(int permits)`
     * `int availablePermits()`
     * `int drainPermits()`
+        * acquires and returns all permits that are immediately available
     * `void reducePermits(int reduction)`
 * permit is acquired on a semaphore basis: one thread can acquire a permit 
 and another can return it
