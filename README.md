@@ -46,8 +46,104 @@ to `N` threads
 and another can return it
 # real-life example
 * one queue (FIFO) to two cashTable
-* if any of two cashdesks is free you approach
-* if all cashdesks is occupied you wait in a queue
+* if any of two tills is free you may approach
+* if all tills are occupied you wait in a queue
 
 # project description
 We will provide simple solution to mentioned earlier problem.
+1. shop
+    ```
+    class Shop {
+        private final Semaphore tills;
+    
+        Shop(int tills) {
+            this.tills = new Semaphore(tills);
+        }
+    
+        void getCashTable(int customerId) {
+            try {
+                System.out.println("Customer " + customerId + " wants to finalize shopping.");
+                tills.acquire();
+            } catch (InterruptedException e) {
+                // not used
+            }
+        }
+    
+        void freeCashTable(int customerId) {
+            System.out.println("Customer " + customerId + " payed and the till is free.");
+            tills.release();
+        }
+    }
+    ```
+1. customer
+    ```
+    class Customer extends Thread {
+    
+        private final Shop shop;
+        private final int id;
+    
+        Customer(Shop shop, int customerId) {
+            this.shop = shop;
+            this.id = customerId;
+        }
+    
+        @Override
+        public void run() {
+            shop.getCashTable(id);
+            try {
+                System.out.println("Customer " + id + " approaches the till and starts to finalize shopping");
+                TimeUnit.MILLISECONDS.sleep(new Random().nextInt(50) + 3);
+                System.out.println("Customer " + id + " is about to free the till");
+            } catch (InterruptedException e) {
+                // not used
+            } finally {
+                shop.freeCashTable(id);
+            }
+        }
+    }
+    ```
+1. simulation
+    ```
+    Shop shop = new Shop(2);
+    
+    for (int i = 0; i < 5; i++) {
+        var customer = new Customer(shop, i);
+        customer.start();
+        customer.join();
+    }
+    ```
+    could produce output:
+    ```
+    Customer 4 wants to finalize shopping.
+    Customer 0 wants to finalize shopping.
+    Customer 1 wants to finalize shopping.
+    
+    Customer 1 approaches the till and starts to finalize shopping
+    
+    Customer 2 wants to finalize shopping.
+    Customer 3 wants to finalize shopping.
+    
+    Customer 0 approaches the till and starts to finalize shopping
+    Customer 0 is about to free the till
+    Customer 0 payed and the till is free.
+    
+    Customer 4 approaches the till and starts to finalize shopping
+    
+    Customer 1 is about to free the till
+    Customer 1 payed and the till is free.
+    
+    Customer 2 approaches the till and starts to finalize shopping
+    
+    Customer 4 is about to free the till
+    Customer 4 payed and the till is free.
+    
+    Customer 3 approaches the till and starts to finalize shopping
+    
+    Customer 2 is about to free the till
+    Customer 2 payed and the till is free.
+    
+    Customer 3 is about to free the till
+    Customer 3 payed and the till is free.
+    ```
+    **as you may notice - at every point in time only two tills
+    are occupied**
