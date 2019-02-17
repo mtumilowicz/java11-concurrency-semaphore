@@ -7,8 +7,8 @@ _Reference_: https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/u
 # preface
 * semaphore controls the number of threads that can access 
 a resource (critical section)
-* difference to synchronized block - semaphore allows access 
-to `N` threads
+* semaphore allows access to `N` threads, while 
+synchronized block to only one 
 * if `N == 1` -> mutually exclusive access
 * semaphore internally has a number of permits
     * thread acquires and releases a permit
