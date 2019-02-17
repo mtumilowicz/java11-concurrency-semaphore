@@ -28,7 +28,7 @@ to `N` threads
     * `boolean tryAcquire(int permits, long timeout, TimeUnit unit)`
     * `void release()`
         * releases a permit, increasing the number of available permits by one
-        * 
+        * calling `release()` more times we call `acquire()` -> more permits that we start with
     * `void release(int permits)`
     * `int availablePermits()`
     * `int drainPermits()`
