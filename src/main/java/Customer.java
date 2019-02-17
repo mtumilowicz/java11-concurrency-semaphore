@@ -16,7 +16,7 @@ class Customer extends Thread {
 
     @Override
     public void run() {
-        shop.getCashTable(id);
+        shop.takeTillBy(id);
         try {
             System.out.println("Customer " + id + " approaches the till and starts to finalize shopping");
             TimeUnit.MILLISECONDS.sleep(new Random().nextInt(50) + 3);
@@ -24,7 +24,7 @@ class Customer extends Thread {
         } catch (InterruptedException e) {
             // not used
         } finally {
-            shop.freeCashTable(id);
+            shop.releaseTillBy(id);
         }
     }
 }

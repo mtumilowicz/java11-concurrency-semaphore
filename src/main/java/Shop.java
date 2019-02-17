@@ -10,17 +10,17 @@ class Shop {
         this.tills = new Semaphore(tills);
     }
 
-    void getCashTable(int customerID) {
+    void takeTillBy(int customerId) {
         try {
-            System.out.println("Customer " + customerID + " wants to finalize shopping.");
+            System.out.println("Customer " + customerId + " wants to finalize shopping.");
             tills.acquire();
         } catch (InterruptedException e) {
             // not used
         }
     }
 
-    void freeCashTable(int customerID) {
-        System.out.println("Customer " + customerID + " payed and the till if free.");
+    void releaseTillBy(int customerId) {
+        System.out.println("Customer " + customerId + " payed and the till is free.");
         tills.release();
     }
 }
