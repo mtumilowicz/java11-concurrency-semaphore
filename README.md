@@ -45,7 +45,7 @@ synchronized block - to 1
 * permit is acquired on a semaphore basis: one thread can acquire a permit 
 and another can return it
 # real-life example
-* one queue (FIFO) to two cashTable
+* one queue (FIFO) to two tills
 * if any of two tills is free you may approach
 * if all tills are occupied you wait in a queue
 
@@ -60,7 +60,7 @@ We will provide simple solution to mentioned earlier problem.
             this.tills = new Semaphore(tills);
         }
     
-        void getCashTable(int customerId) {
+        void takeTillBy(int customerId) {
             try {
                 System.out.println("Customer " + customerId + " wants to finalize shopping.");
                 tills.acquire();
@@ -69,7 +69,7 @@ We will provide simple solution to mentioned earlier problem.
             }
         }
     
-        void freeCashTable(int customerId) {
+        void releaseTillBy(int customerId) {
             System.out.println("Customer " + customerId + " payed and the till is free.");
             tills.release();
         }
@@ -89,7 +89,7 @@ We will provide simple solution to mentioned earlier problem.
     
         @Override
         public void run() {
-            shop.getCashTable(id);
+            shop.takeTillBy(id);
             try {
                 System.out.println("Customer " + id + " approaches the till and starts to finalize shopping");
                 TimeUnit.MILLISECONDS.sleep(new Random().nextInt(50) + 3);
@@ -97,7 +97,7 @@ We will provide simple solution to mentioned earlier problem.
             } catch (InterruptedException e) {
                 // not used
             } finally {
-                shop.freeCashTable(id);
+                shop.releaseTillBy(id);
             }
         }
     }
@@ -105,11 +105,17 @@ We will provide simple solution to mentioned earlier problem.
 1. simulation
     ```
     Shop shop = new Shop(2);
-    
+
+    var threads = new LinkedList<Thread>();
+
     for (int i = 0; i < 5; i++) {
         var customer = new Customer(shop, i);
         customer.start();
-        customer.join();
+        threads.add(customer);
+    }
+
+    for (Thread thread : threads) {
+        thread.join();
     }
     ```
     could produce output:
