@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/mtumilowicz/java11-concurrency-semaphore.svg?branch=master)](https://travis-ci.com/mtumilowicz/java11-concurrency-semaphore)
+
 # java11-concurrency-semaphore
 
 _Reference_: https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/Semaphore.html
