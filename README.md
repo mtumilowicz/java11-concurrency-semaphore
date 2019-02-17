@@ -28,8 +28,7 @@ synchronized block - to 1
         * blocks if a permit is not available
         * thread could be interrupted while waiting for permit
     * `void acquire(int permits)`
-    * `void acquireUninterruptibly()`
-        * can't be interrupted while waiting for permit
+    * `void acquireUninterruptibly()` - can't be interrupted while waiting for permit
     * `void acquireUninterruptibly(int permits)`
     * `boolean tryAcquire()` - acquires a permit from this semaphore, only if one is available at the
         time of invocation
@@ -38,11 +37,10 @@ synchronized block - to 1
     * `boolean tryAcquire(int permits, long timeout, TimeUnit unit)`
     * `void release()`
         * releases a permit, increasing the number of available permits by one
-        * calling `release()` more times we call `acquire()` -> more permits that we start with
+        * calling `release()` more times than `acquire()` -> more permits that we start with
     * `void release(int permits)`
     * `int availablePermits()`
-    * `int drainPermits()`
-        * acquires and returns all permits that are immediately available
+    * `int drainPermits()` - acquires and returns all permits that are immediately available
     * `void reducePermits(int reduction)`
 * permit is acquired on a semaphore basis: one thread can acquire a permit 
 and another can return it
