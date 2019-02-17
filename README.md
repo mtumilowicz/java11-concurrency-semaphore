@@ -18,7 +18,6 @@ to `N` threads
     * `void acquire() throws InterruptedException`
         * acquires a permit, if one is available and returns immediately, 
         reducing the number of available permits by one
-        * 
     * `void acquire(int permits)`
     * `void acquireUninterruptibly()`
     * `void acquireUninterruptibly(int permits)`
@@ -33,6 +32,8 @@ to `N` threads
     * `int availablePermits()`
     * `int drainPermits()`
     * `void reducePermits(int reduction)`
+* permit is acquired on a semaphore basis: one thread can acquire a permit 
+and another can return it
 # real-life example
 * one queue (FIFO) to two cashTable
 * if any of two cashdesks is free you approach
