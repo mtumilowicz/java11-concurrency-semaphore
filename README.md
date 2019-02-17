@@ -145,5 +145,5 @@ We will provide simple solution to mentioned earlier problem.
     Customer 3 is about to free the till
     Customer 3 payed and the till is free.
     ```
-    **as you may notice - at every point in time only two tills
-    are occupied**
+    **as you may notice - at every point in time no more than 
+    two tills are occupied**
