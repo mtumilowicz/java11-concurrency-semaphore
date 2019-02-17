@@ -1,5 +1,7 @@
 # java11-concurrency-semaphore
 
+_Reference_: https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/Semaphore.html
+
 # preface
 * semaphore controls the number of threads that can access 
 a resource (critical section)
@@ -17,12 +19,12 @@ to `N` threads
         * acquires a permit, if one is available and returns immediately, 
         reducing the number of available permits by one
         * 
-    * `void acquireUninterruptibly()`
     * `void acquire(int permits)`
+    * `void acquireUninterruptibly()`
     * `void acquireUninterruptibly(int permits)`
     * `boolean tryAcquire()`
-    * `boolean tryAcquire(long timeout, TimeUnit unit)`
     * `boolean tryAcquire(int permits)`
+    * `boolean tryAcquire(long timeout, TimeUnit unit)`
     * `boolean tryAcquire(int permits, long timeout, TimeUnit unit)`
     * `void release()`
         * releases a permit, increasing the number of available permits by one
