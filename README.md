@@ -9,3 +9,11 @@ to `N` threads
 * semaphore internally has a number of permits
     * thread acquires and releases a permit
     * if there is no free permit to take - thread is forced to wait
+
+# real-life example
+* one queue (FIFO) to two cashTable
+* if any of two cashdesks is free you approach
+* if all cashdesks is occupied you wait in a queue
+
+# project description
+We will provide simple solution to mentioned earlier problem.
