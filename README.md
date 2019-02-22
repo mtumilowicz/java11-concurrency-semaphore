@@ -13,6 +13,7 @@ synchronized block - to 1
 * semaphore internally has a number of permits
     * thread acquires and releases a permit
     * if there is no free permit to take - thread is forced to wait
+* semaphores can be used to implement resource pools
 
 # java
 * semaphores in Java are represented by `Semaphores` class
