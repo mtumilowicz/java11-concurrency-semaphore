@@ -9,7 +9,8 @@ _Reference_: https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/u
 a resource (critical section)
 * semaphore allows access to `N` threads, 
 synchronized block - to 1
-* if `N == 1` semaphore may be treated as mutually exclusive access guard
+* if `N == 1` semaphore may be treated as mutually exclusive access guard (mutex with nonreentrant locking
+semantics)
 * semaphore internally has a number of permits
     * thread acquires and releases a permit
     * if there is no free permit to take - thread is forced to wait
