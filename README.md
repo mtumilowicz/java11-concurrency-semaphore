@@ -14,7 +14,7 @@ semantics)
 * semaphore internally has a number of permits
     * thread acquires and releases a permit
     * if there is no free permit to take - thread is forced to wait
-* semaphores can be used to implement resource pools
+* semaphores can be used to implement resource pools (database connection pools)
 
 # java
 * semaphores in Java are represented by `Semaphores` class
